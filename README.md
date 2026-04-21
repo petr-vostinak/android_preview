@@ -96,7 +96,7 @@ Inspired by [Google's Guide to App Architecture](https://developer.android.com/t
 
 ## Running the Application
 
-1.  Clone the repository: `git clone https://github.com/petr-vostinak/nba.git`
+1.  Clone the repository: `git clone https://github.com/petr-vostinak/android_preview.git`
 2.  Open the project in Android Studio.
 3.  Get your API key from [BallDon'tLie](https://www.balldontlie.io/).
 4.  Update a `local.properties` file in the root directory of the project and add `API_KEY=your_api_key` to it.
