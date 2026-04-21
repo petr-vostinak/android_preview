@@ -114,7 +114,7 @@ internal fun TeamDetailScreen(
                         .fillMaxWidth()
                         .padding(8.dp),
                     text = "Data origin: ${origin.name}",
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     textAlign = TextAlign.Center
                 )
             }
