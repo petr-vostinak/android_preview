@@ -7,6 +7,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
     alias(libs.plugins.dependency.analysis)
+    kotlin("plugin.serialization") version "2.0.10"
 }
 
 android {
@@ -76,7 +77,8 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     // navigation
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.hilt.navigation.compose)
 
     // Import the Firebase BoM

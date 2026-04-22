@@ -1,38 +1,29 @@
 package cz.vostinak.nba.ui.navigation
 
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
+
 /**
  * Screens.
  */
-sealed class Screens(val route: String) {
+@Serializable
+sealed interface Screens: NavKey {
 
     /**
      * Players list.
      */
-    object PlayersList: Screens("players_list")
+    @Serializable
+    data object PlayersList: Screens
 
     /**
      * PlayerItemState detail.
      */
-    object PlayerDetail: Screens("player_detail/{playerId}") {
-        /**
-         * Create route.
-         * @param playerId PlayerItemState ID
-         */
-        fun createRoute(playerId: Long): String {
-            return "player_detail/$playerId"
-        }
-    }
+    @Serializable
+    data class PlayerDetail(val playerId: Long): Screens
 
     /**
      * Teams detail.
      */
-    object TeamsDetail: Screens("team_detail/{teamId}") {
-        /**
-         * Create route.
-         * @param teamId TeamState ID
-         */
-        fun createRoute(teamId: Long): String {
-            return "team_detail/$teamId"
-        }
-    }
+    @Serializable
+    data class TeamsDetail(val teamId: Long): Screens
 }
