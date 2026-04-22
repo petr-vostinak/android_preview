@@ -14,6 +14,7 @@ It is also sandbox where I can try new things and experiment with new technologi
 
 *   **Kotlin:** The main programming language.
 *   **Jetpack Compose:** A modern UI toolkit for declarative UI development.
+*   **Navigation 3:** Type-safe, Compose-first navigation with `NavKey` routes and `NavDisplay`.
 *   **Clean Architecture:** Layer separation for better code organization and testability.
 *   **Hilt:** Dependency injection framework to simplify dependency management.
 *   **Coroutines:** For asynchronous operations and thread management.
@@ -40,7 +41,7 @@ The application is designed with an emphasis on **Clean Architecture** principle
 
 ### Modules
 
-*   **`app`:** The application module that contains navigation and launches the application.
+*   **`app`:** The application module that launches the app and wires Navigation 3 (`MainNavHost`, `Screens`, navigation state).
 *   **`presentation`:** The module for data presentation and UI logic (ViewModels, UI states).
 *   **`domain`:** The module with business logic (Use Cases, Entities).
 *   **`data-api`:** The module for API data handling (Repositories, Data Sources).
@@ -48,6 +49,14 @@ The application is designed with an emphasis on **Clean Architecture** principle
 *   **`data-realm`:** The module for Realm database data handling (Repositories, Data Sources).
 *   **`core-ui`:** The module for shared UI theme.
 *   **`build-logic`:** The module for custom Gradle plugins.
+
+### Navigation
+
+The app uses **Navigation 3** in the `app` module:
+
+*   **Typed routes (`NavKey`):** `Screens` define serializable route keys for compile-time safety.
+*   **Main host (`NavDisplay`):** `MainNavHost` maps keys to composable destinations.
+*   **Navigation state:** Back stack and entry decorators are remembered through `NavigationState` helpers.
 
 ### Custom Gradle Plugins
 
