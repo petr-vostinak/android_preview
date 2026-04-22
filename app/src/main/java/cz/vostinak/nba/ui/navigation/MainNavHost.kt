@@ -1,59 +1,56 @@
 package cz.vostinak.nba.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import cz.vostinak.presentation.screens.team.TeamDetailScreen
+import androidx.compose.runtime.remember
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import cz.vostinak.presentation.screens.list.PlayersListScreen
 import cz.vostinak.presentation.screens.player.PlayerDetailScreen
+import cz.vostinak.presentation.screens.team.TeamDetailScreen
 
 /**
  * Main navigation.
  */
 @Composable
 fun MainNavHost() {
-    val navController: NavHostController = rememberNavController()
+    val navigationState = rememberNavigationState(
+        startRoute = Screens.PlayersList,
+        topLevelRoutes = setOf(Screens.PlayersList)
+    )
+    val navigator = remember { Navigator(navigationState) }
 
-    NavHost(
-        navController = navController,
-        startDestination = Screens.PlayersList.route
-    ) {
-        // List of players
-        composable(route = Screens.PlayersList.route) {
+    val entryProvider = entryProvider<NavKey> {
+        entry<Screens.PlayersList> {
             PlayersListScreen(
                 onPlayerDetailClick = { playerId ->
-                    navController.navigate(Screens.PlayerDetail.createRoute(playerId))
+                    navigator.navigate(Screens.PlayerDetail(playerId))
                 }
             )
         }
-
-        // PlayerItemState detail
-        composable(route = Screens.PlayerDetail.route) { backStackEntry ->
-            val playerId = backStackEntry.arguments?.getString("playerId")?.toLong()
-
+        entry<Screens.PlayerDetail> { key ->
             PlayerDetailScreen(
-                playerId = playerId ?: 0,
+                playerId = key.playerId,
                 onBack = {
-                    navController.popBackStack()
+                    navigator.goBack()
                 },
                 onTeamClick = { teamId ->
-                    navController.navigate(Screens.TeamsDetail.createRoute(teamId))
+                    navigator.navigate(Screens.TeamsDetail(teamId))
                 }
             )
         }
-
-        // TeamState detail
-        composable(route = Screens.TeamsDetail.route) { backStackEntry ->
-            val teamId = backStackEntry.arguments?.getString("teamId")?.toLong()
-
+        entry<Screens.TeamsDetail> { key ->
             TeamDetailScreen(
-                teamId = teamId ?: 0,
+                teamId = key.teamId,
                 onBack = {
-                    navController.popBackStack()
+                    navigator.goBack()
                 }
             )
         }
     }
+
+    NavDisplay(
+        entries = navigationState.toEntries(entryProvider),
+        onBack = { navigator.goBack() }
+    )
 }

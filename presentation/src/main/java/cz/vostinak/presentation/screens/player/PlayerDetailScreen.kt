@@ -99,6 +99,8 @@ internal fun PlayerDetailScreen(
     addToFavorites: ((PlayerState) -> Unit)? = null,
     removeFromFavorites: ((Long) -> Unit)? = null
 ) {
+    val successData = (state as? UiState.Success)?.data
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -128,15 +130,15 @@ internal fun PlayerDetailScreen(
                     }
                 },
                 actions = {
-                    (state as? UiState.Success)?.data?.isFavorite?.let { isFavorite ->
+                    successData?.isFavorite?.let { isFavorite ->
                         Image(
                             modifier = Modifier
                                 .padding(end = 16.dp)
                                 .clickable {
                                     if (isFavorite) {
-                                        removeFromFavorites?.invoke(state.data.playerState.id)
+                                        removeFromFavorites?.invoke(successData.playerState.id)
                                     } else {
-                                        addToFavorites?.invoke(state.data.playerState)
+                                        addToFavorites?.invoke(successData.playerState)
                                     }
                                 },
                             imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
@@ -148,7 +150,7 @@ internal fun PlayerDetailScreen(
             )
         },
         bottomBar = {
-            (state as? UiState.Success)?.data?.playerState?.origin?.let { origin ->
+            successData?.playerState?.origin?.let { origin ->
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -178,10 +180,12 @@ internal fun PlayerDetailScreen(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                PlayerDetailContent(
-                    state = (state as UiState.Success).data.playerState,
-                    onTeamClick = onTeamClick
-                )
+                successData?.let { data ->
+                    PlayerDetailContent(
+                        state = data.playerState,
+                        onTeamClick = onTeamClick
+                    )
+                }
             }
 
             // Show error
