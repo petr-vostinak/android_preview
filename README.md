@@ -27,6 +27,7 @@ It is also sandbox where I can try new things and experiment with new technologi
 *   **Dependency analysis gradle plugin** Detects unused and misused dependencies
 *   **Mockito:** For unit testing.
 *   **JUnit:** Testing framework.
+*   **Custom Gradle Plugins:** To reduce boilerplate code in `build.gradle.kts` files and enforce conventions.
 
 ## Architecture
 
@@ -46,6 +47,11 @@ The application is designed with an emphasis on **Clean Architecture** principle
 *   **`data-room`:** The module for Room database data handling (Repositories, Data Sources).
 *   **`data-realm`:** The module for Realm database data handling (Repositories, Data Sources).
 *   **`core-ui`:** The module for shared UI theme.
+*   **`build-logic`:** The module for custom Gradle plugins.
+
+### Custom Gradle Plugins
+
+To reduce boilerplate code in `build.gradle.kts` files and enforce conventions, this project uses custom Gradle plugins, located in the `build-logic` module. The `AndroidLibraryConventionPlugin` is a prime example, setting up the standard configuration for all Android library modules, including `compileSdk`, `minSdk`, `compileOptions`, and common dependencies. This makes the module-level build files much cleaner and easier to maintain.
 
 ### General diagram
 
@@ -88,7 +94,6 @@ Inspired by [Google's Guide to App Architecture](https://developer.android.com/t
 
 ## Future Improvements
 
-*   **Gradle Plugins:** Adding Gradle plugins for code quality, performance, and dependency management. https://developer.android.com/build/extend-agp
 *   **Pager:** Implementing a more robust paging solution with network and database caching. https://developer.android.com/develop/ui/compose/layouts/pager
 *   **Feature Modules:** Splitting the application into feature modules for better modularity and separation of concerns. https://developer.android.com/topic/modularization
 *   **More Tests:** Expanding tests to cover more scenarios and coverage.
