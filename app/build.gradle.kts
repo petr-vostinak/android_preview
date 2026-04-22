@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "cz.vostinak.nba"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "cz.vostinak.nba"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
