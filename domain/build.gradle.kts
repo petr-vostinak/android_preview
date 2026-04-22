@@ -1,6 +1,6 @@
 plugins {
     id("myproject.android.library")
-    id("com.google.devtools.ksp")
+    id("myproject.android.hilt")
     alias(libs.plugins.dependency.analysis)
 }
 
@@ -13,10 +13,6 @@ dependencies {
     implementation(project(":data-room"))
     implementation(project(":data-api"))
     implementation(project(":core-ui"))
-
-    // Hilt
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
 
     // Realm
     implementation(libs.library.base)

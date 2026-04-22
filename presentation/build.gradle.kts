@@ -1,8 +1,7 @@
 plugins {
     id("myproject.android.library")
     id("myproject.android.compose")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("myproject.android.hilt")
     alias(libs.plugins.dependency.analysis)
 }
 
@@ -20,14 +19,6 @@ dependencies {
 
     // Compose
     implementation(libs.androidx.material.icons.extended)
-
-    // navigation
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
-
-    // Hilt
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
 
     // Coil
     implementation(libs.coil.compose)

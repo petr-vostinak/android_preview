@@ -1,7 +1,6 @@
 plugins {
     id("myproject.android.library")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("myproject.android.hilt")
     alias(libs.plugins.dependency.analysis)
 }
 
@@ -10,10 +9,6 @@ android {
 }
 
 dependencies {
-    // Hilt
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
-
     // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
